@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>ddPCR group testing map</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet" />
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+   
+<style>
+	body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+    #title1 { position: absolute; top: 0; bottom: 0; width: 100%; z-index: 100000; height:20px}
+    
+  /*  #state-legend { position: absolute; top: 400px; bottom: 0; }*/
+</style>
+</head>
+<body>
+<style>
+.legend {
+background-color: #fff;
+border-radius: 3px;
+bottom: 30px;
+box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+padding: 10px;
+position: absolute;
+right: 10px;
+z-index: 1;
+}
+ 
+.legend h4 {
+margin: 0 0 10px;
+}
+ 
+.legend div span {
+border-radius: 50%;
+display: inline-block;
+height: 10px;
+margin-right: 5px;
+width: 10px;
+}
+</style>
+     
+    
+
+<div id="map"></div>
+
+    <div id="state-legend" class="legend">
+        <h3>Legend:</h3>
+    <div><span style="background-color: #c23531"></span>ddPCR testing locations</div> 
+    <p>Institutions per state:</p>    
+ <div id="state-legend0">
+
+</div>
+</div>
+<div id="title1" style="background-color: white; opacity:0.5; height:55px;">
+ <center><h3 style="line-height: 1px;">ddPCR group testing map</h3>
+<p style="position: relative; top:-0.5rem !important;">Authors:Cassidy Mentus, Martin Romeo, Kevin Schallert, Olga Buchel, Christian DiPaola. </center>
+</div>    
+
+<script>
+    var map;
+//d3.csv("ddPCR_per_state.csv",function(err,da) {
+           
+            
+            
+        
+fetch('s_11au16_1.json').then(res => res.json()) //ne_10m_admin_1_states_provinces102
+.then(data => {  
+    
+    	mapboxgl.accessToken = 'pk.eyJ1Ijoib2J1Y2hlbCIsImEiOiJmOWQ2MzQxNmE0M2Y3YmVjNzA2NmM2MGQzYTIwYmQ3OCJ9.psxJSN8q9n2-HfFGoIUNJA';
+map = new mapboxgl.Map({
+container: 'map',
+style: 'mapbox://styles/mapbox/dark-v8',
+center: [-92.403732, 40.492392],
+zoom: 3
+});
+// map.addControl(new mapboxgl.FullscreenControl());
+ var stateLegendEl = document.getElementById('state-legend');
+    
+ stateLegendEl.style.display = 'block';
+    
+
+    // console.log(da);
+  var arr=[[0, '#000000'],[1, '#2f4554'],[8, '#749f83']];   
+    
+//['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']    [2, '#2f4554'],[3, '#61a0a8'],[4, '#d48265'],[7, '#546570']
+map.on('load', function() {
+   // console.log(data);
+var layer=map.addSource('places', {
+'type': 'geojson',
+'data': data
+});
+ map.addLayer({
+'id': 'place_data',
+'type': 'fill',
+'source': 'places',
+'paint': {
+'fill-color': {
+property: "value",
+stops: arr
+},
+'fill-opacity': 0.7
+},
+'filter': ['==', '$type', 'Polygon']      
+});
+    
+var layer2=map.addSource('places2', {
+'type': 'geojson',
+'data': data
+});    
+  map.addLayer({
+'id': 'place_data2',
+'type': 'circle',
+'source': 'places2',
+'paint': {
+'circle-color': "#c23531"
+    
+},
+'filter': ['==', '$type', 'Point']      
+});       
+
+ map.on('click', 'place_data2', function(e) {
+var coordinates = e.features[0].geometry.coordinates.slice();
+var description = e.features[0].properties.name;
+ 
+// Ensure that if the map is zoomed out such that multiple
+// copies of the feature are visible, the popup appears
+// over the copy being pointed to.
+while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+}
+ 
+new mapboxgl.Popup()
+.setLngLat(coordinates)
+.setHTML(description)
+.addTo(map);
+});   
+    
+    
+    
+    
+    
+ var data0 = [{"color":"#2f4554","value":1},{"color":"#749f83","value":8}];
+    var extent = d3.extent(data0, d => d.value);
+    
+    var padding = 9;
+    var width = 220;
+    var innerWidth = width - (padding * 2);
+    var barHeight = 8;
+    var height = 28;
+
+    var xScale = d3.scaleLinear()
+        .range([0, innerWidth])
+        .domain(extent);
+
+    var xTicks = data0.filter(f => f.value % 1 === 0).map(d => d.value);
+
+    var xAxis = d3.axisBottom(xScale)
+        .tickSize(barHeight * 2)
+        .tickValues(xTicks);
+
+    var svg = d3.select("#state-legend0").append("svg").attr("width", width).attr("height", height);
+    var g = svg.append("g").attr("transform", "translate(" + padding + ", 0)");
+
+    var defs = svg.append("defs");
+    var linearGradient = defs.append("linearGradient").attr("id", "myGradient");
+    linearGradient.selectAll("stop")
+        .data(data0)
+      .enter().append("stop")
+        .attr("offset", d => ((d.value - extent[0]) / (extent[1] - extent[0]) * 100) + "%")
+        .attr("stop-color", d => d.color);
+
+    g.append("rect")
+        .attr("width", innerWidth)
+        .attr("height", barHeight)
+        .style("fill", "url(#myGradient)");
+
+    g.append("g")
+        .call(xAxis);
+      //.select(".domain").remove();
+});  
+    });
+
+
+</script>
+ 
+</body>
+</html>

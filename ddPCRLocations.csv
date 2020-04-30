@@ -1,0 +1,51 @@
+Name,CLIA,Lat,Lon,Quantity(atleast this many),State
+University of New Hampshire,NA,43.1389,-70.937,1,NH
+Oregon State University,NA,44.5638,-123.2794,1,OR
+Northwestern University,NA,42.055984,-87.675171,1,IL
+Boston Children's Hospital,NA,42.3374,-71.1048,1,MA
+Washington University in St. Louis ,NA,38.6488,-90.3108,1,MO
+NCI/NIH CCR Genomics core,NA,26.08,-80.2453,1,MD
+Princeton,NA,40.3431,-74.6551,1,NJ
+University of North Carolina,NA,35.9049,-79.0469,1,NC
+Harvard,NA,42.377,-71.1167,1,MA
+University of Virginia ,NA,38.0336,-78.508,1,VA
+University of Nebraska-Lincoln,NA,40.8202,-96.7,1,NE
+Brown,NA,41.8268,-71.4025,1,RI
+Cornell,NA,42.4534,-76.4735,1,NY
+UCSB,NA,34.414,-119.8489,1,CA
+City of Hope Hospital,NA,34.08,-117.59,1,CA
+Berkeley,NA,37.8719,-122.2585,1,CA
+SUNY Upstate,NA,43.0423,-76.1396,1,NY
+MD Anderson,NA,29.7068,-95.3972,1,TX
+Salk,NA,40.7608,-111.891,1,UT
+NYU Med,NA,40.7423,-73.9741,1,NY
+ucla,NA,34.0689,-118.4452,1,CA
+University of Washington,NA,47.655548,-122.3032,1,WA
+Colorado State University,NA,40.5734,-105.0865,1,CO
+University of Florida,NA,29.6436,-82.3549,1,FL
+UT Health San Antonio,NA,29.5075,-98.5754,1,TX
+NIDA IRP Core Facility,NA,39.2902,-76.5471,1,MD
+University of Houston,NA,29.7199,-95.3422,1,TX
+Georgia Institute of Technology,NA,33.7756,-84.3963,1,GA
+University of North Dakota,NA,47.9229,-97.0768,1,ND
+University of Oklahoma,NA,35.2059,-97.4457,1,OK
+Boston Children's Hospital,NA,42.3374,-71.1048,1,MA
+William and Mary University,NA,37.2727,-76.7137,1,VA
+Drexel University ,NA,39.9566,-75.1899,1,PA
+University of Iowa,NA,41.6627,-91.5549,1,IA
+Texas A&M,NA,30.6188,-96.3365,1,TX
+North Carolina State University,NA,35.7847,-78.6821,1,NC
+"University of California, San Diego",NA,32.8801,-117.234,1,CA
+"University of California, Irvine",NA,33.6405,-117.8443,1,CA
+National Cancer Institute,NA,38.9847,-77.0947,1,MD
+"University of Texas, Southwestern",NA,32.8173,-96.8419,1,TX
+Emory,NA,33.7971,-84.3222,1,GA
+"University of California, San Francisco",NA,37.7855,-122.4402,1,CA
+Childrens Hospital Los Angeles,NA,34.0918,-118.2877,1,CA
+University of Minnesota,NA,44.974,-93.2277,1,MN
+University of North Texas health science campus,NA,32.7501,-97.3689,1,TX
+University of North Texas,NA,33.2075,-97.1526,1,TX
+Augusta University,NA,33.4709,-81.9899,1,GA
+Duke University,NA,36.0014,-78.9382,1,NC
+University of Wisconsin,NA,43.0766,-89.4125,1,WI
+University of Rochester,NA,43.1306,-77.626,1,NY
